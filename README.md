@@ -1,13 +1,13 @@
 # 🔥 Habit Tracker — Java Spring Boot
 
-A Duolingo-style habit tracker with streaks, progress stats, and a full REST API.
+A habit tracker with streaks, progress stats, and a full REST API.
 
 ---
 
 ## ✨ Features
 
 | Feature | Details |
-|---|---|
+
 | **Track Daily Habits** | Create habits with name, emoji, frequency, and category |
 | **Streak System** | Auto-tracks consecutive completions, resets on missed days |
 | **Longest Streak** | Records your personal best for every habit |
@@ -106,7 +106,7 @@ src/
 ### Dashboard
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
+
 | `GET` | `/api/dashboard` | Full dashboard stats |
 | `GET` | `/api/dashboard/milestones` | Active streak milestones |
 
