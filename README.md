@@ -1,216 +1,169 @@
-# 🔥 Habit Tracker — Java Spring Boot
 
-A habit tracker with streaks, progress stats, and a full REST API.
+# 📘 Habit Tracker App (Java)
+
+## 📌 Project Overview
+
+The **Habit Tracker App** is a Java-based desktop application designed to help users build and maintain positive daily habits. It allows users to add habits, track daily completion, maintain streaks, and analyze progress through simple statistics. The application encourages consistency and productivity by visually tracking user performance over time.
+
+---
+
+## 🎯 Objectives
+
+* Help users develop good habits
+* Track daily progress and consistency
+* Implement streak-based motivation system
+* Provide simple and interactive GUI
 
 ---
 
 ## ✨ Features
 
-| Feature | Details |
+### ✅ Core Features
 
-| **Track Daily Habits** | Create habits with name, emoji, frequency, and category |
-| **Streak System** | Auto-tracks consecutive completions, resets on missed days |
-| **Longest Streak** | Records your personal best for every habit |
-| **Milestone Badges** | 🔥 7, 14, 21, 30, 60, 100, 365-day celebrations |
-| **Mood Logging** | Log mood (GREAT/GOOD/NEUTRAL/BAD/TERRIBLE) per completion |
-| **Progress Stats** | Completion rates, last 7/30 day summaries, calendar data |
-| **Dashboard** | Global stats, today's habits, top streaks, 30-day graph |
-| **H2 + JPA** | In-memory DB for dev; swap to PostgreSQL/MySQL for prod |
-| **REST API** | Full CRUD + completion + stats endpoints |
-| **Global Error Handling** | Structured `ApiResponse<T>` for all responses |
-| **Scheduled Task** | Midnight cron evaluates streak breaks automatically |
-| **Demo Data** | 5 sample habits seeded on startup |
-| **Unit Tests** | Mockito-based service tests |
-| **Integration Tests** | MockMvc full API tests |
+* Add new habits (e.g., Exercise, Study, Read)
+* Mark habits as completed daily
+* View list of all habits
 
----
+### 🔥 Streak System
 
-## 🚀 Getting Started
+* Tracks consecutive days of completion
+* Automatically resets streak if a day is missed
 
-### Prerequisites
-- Java 17+
-- Maven 3.8+
+### 📊 Progress Tracking
 
-### Run the App
+* Total completed days
+* Current streak
+* Completion percentage
 
-```bash
-cd habit-tracker
-mvn spring-boot:run
-```
+### 💾 Data Storage (Optional Enhancement)
 
-Server starts at: **http://localhost:8080**
-
-H2 Console: **http://localhost:8080/h2-console**
-- JDBC URL: `jdbc:h2:mem:habitdb`
-- Username: `sa` / Password: *(empty)*
-
-### Run Tests
-
-```bash
-mvn test
-```
+* Save habits to file/database
+* Load data on application startup
 
 ---
 
-## 📁 Project Structure
+## 🧱 Technologies Used
 
-```
-src/
-├── main/java/com/habittracker/
-│   ├── HabitTrackerApplication.java      # Entry point
-│   ├── model/
-│   │   ├── Habit.java                    # JPA entity + domain logic
-│   │   ├── HabitLog.java                 # Completion log entry
-│   │   ├── HabitFrequency.java           # DAILY / WEEKLY / WEEKDAYS / WEEKENDS
-│   │   ├── HabitCategory.java            # HEALTH / FITNESS / LEARNING / ...
-│   │   └── MoodRating.java               # GREAT / GOOD / NEUTRAL / BAD / TERRIBLE
-│   ├── repository/
-│   │   ├── HabitRepository.java          # Spring Data JPA queries
-│   │   └── HabitLogRepository.java
-│   ├── service/
-│   │   └── HabitService.java             # Business logic + streak engine
-│   ├── controller/
-│   │   ├── HabitController.java          # /api/habits REST endpoints
-│   │   ├── DashboardController.java      # /api/dashboard endpoints
-│   │   └── GlobalExceptionHandler.java   # Unified error responses
-│   └── util/
-│       ├── HabitDto.java                 # All request/response DTOs
-│       ├── HabitMapper.java              # Entity → DTO mapping
-│       └── DataInitializer.java          # Demo seed data
-├── resources/
-│   └── application.properties
-└── test/
-    ├── HabitServiceTest.java             # Unit tests (Mockito)
-    ├── HabitControllerIntegrationTest.java # Integration tests (MockMvc)
-    └── resources/application-test.properties
-```
+* **Java** (Core Programming)
+* **Swing / JavaFX** (GUI Development)
+* **File Handling / SQLite** (Data Storage - optional)
 
 ---
 
-## 🌐 REST API Reference
+## 🖥️ System Requirements
 
-### Habits
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/habits` | List all habits (`?activeOnly=true`) |
-| `POST` | `/api/habits` | Create a new habit |
-| `GET` | `/api/habits/{id}` | Get a habit by ID |
-| `PUT` | `/api/habits/{id}` | Update a habit |
-| `DELETE` | `/api/habits/{id}` | Delete a habit |
-| `POST` | `/api/habits/{id}/complete` | Mark habit as done |
-| `DELETE` | `/api/habits/{id}/complete` | Undo completion |
-| `GET` | `/api/habits/{id}/logs` | Get all completion logs |
-| `GET` | `/api/habits/{id}/stats` | Get detailed stats |
-
-### Dashboard
-
-| Method | Endpoint | Description |
-
-| `GET` | `/api/dashboard` | Full dashboard stats |
-| `GET` | `/api/dashboard/milestones` | Active streak milestones |
+* Java JDK 8 or above
+* Any IDE (Eclipse / IntelliJ / NetBeans)
+* Basic system with GUI support
 
 ---
 
-## 📋 Request / Response Examples
+## ⚙️ Installation & Setup
 
-### Create Habit
-```json
-POST /api/habits
-{
-  "name": "Morning Run",
-  "description": "5km every morning",
-  "frequency": "DAILY",
-  "category": "FITNESS",
-  "emoji": "🏃"
-}
-```
+1. **Clone or Download Project**
 
-### Complete a Habit
-```json
-POST /api/habits/1/complete
-{
-  "mood": "GREAT",
-  "note": "Felt amazing today!"
-}
-```
+   ```
+   git clone <repository-link>
+   ```
 
-### Response Format
-```json
-{
-  "success": true,
-  "message": "🎉 Habit completed! Keep the streak alive!",
-  "data": {
-    "id": 1,
-    "name": "Morning Run",
-    "currentStreak": 7,
-    "longestStreak": 7,
-    "completedToday": true,
-    "completionRate": 85.7
-  }
-}
-```
+2. **Open in IDE**
+
+   * Import project into your Java IDE
+
+3. **Compile the Code**
+
+   ```
+   javac HabitTracker.java
+   ```
+
+4. **Run the Application**
+
+   ```
+   java HabitTracker
+   ```
 
 ---
 
-## 🏭 Production Upgrade Path
+## 🧠 Working Principle
 
-### Switch to PostgreSQL
+1. User enters a habit name
+2. Habit is added to the list
+3. User marks habit as completed daily
+4. App updates:
 
-Replace H2 in `pom.xml`:
-```xml
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-</dependency>
-```
-
-Update `application.properties`:
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/habitdb
-spring.datasource.username=your_user
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=validate
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-```
-
-### Add Spring Security (JWT)
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
-```
-
-### Add Multi-User Support
-- Add a `User` entity
-- Add `@ManyToOne User owner` to `Habit`
-- Filter all queries by authenticated user
+   * Streak count
+   * Total completion days
+5. If a day is skipped → streak resets
 
 ---
 
-## 🔧 Streak Engine Logic
+## 🖼️ GUI Components
 
-```
-Complete today:
-  If already completed today → no-op
-  Else if last completed = yesterday → streak++
-  Else → streak = 1 (restart)
-  Update longestStreak if needed
-
-Daily midnight cron:
-  For each active habit:
-    If lastCompleted < yesterday → currentStreak = 0
-```
+* Text Field → Add habit
+* Buttons → Add / Mark Complete
+* List View → Display habits
+* Labels → Show streak & progress
 
 ---
 
-## 📦 Tech Stack
+## 🔢 Formula Used
 
-- **Java 17**
-- **Spring Boot 3.2**
-- **Spring Data JPA / Hibernate**
-- **H2** (dev) / PostgreSQL-ready (prod)
-- **Lombok**
-- **JUnit 5 + Mockito**
-- **MockMvc** for integration testing
+* **Streak Logic**
+
+  * If completed daily → streak increases
+  * If missed → streak resets
+
+* **Completion Percentage**
+
+  ```
+  Completion % = (Completed Days / Total Days) × 100
+  ```
+
+---
+
+## 🚀 Future Enhancements
+
+* Add calendar-based tracking
+* Notifications/reminders
+* Graphs and charts for progress
+* Mobile app version
+* Cloud sync (Firebase)
+* Dark mode UI
+
+---
+
+## 🎯 Learning Outcomes
+
+* Java GUI development
+* Event handling
+* Object-Oriented Programming (OOP)
+* File handling / database basics
+* Logical problem solving
+
+---
+
+## 📌 Use Cases
+
+* Students tracking study habits
+* Fitness tracking (exercise, water intake)
+* Personal productivity improvement
+
+---
+
+## 🤝 Contribution
+
+Feel free to fork this project and improve features like UI, database integration, or analytics.
+
+---
+
+## 📄 License
+
+This project is for educational purposes and can be freely used and modified.
+
+---
+
+## 👨‍💻 Author
+
+Chetan Komawar
+
+---
